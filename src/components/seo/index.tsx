@@ -27,8 +27,8 @@ export default function Seo({
     title: title ?? defaultTitle,
     description: description ?? defaultDescription,
     image:
-      image && image.startsWith("http")
-        ? image
+      typeof image === "undefined" && defaultImage.startsWith("http")
+        ? defaultImage
         : `${siteUrl}${image ?? defaultImage}`,
     url: `${siteUrl}${pathname ?? ``}`,
     twitterUsername,
