@@ -1,70 +1,103 @@
 import React, { CanvasHTMLAttributes, useEffect, useMemo, useRef } from "react";
 import "./style.css";
+import { useMouseMoveEvent } from "../../hooks/use-mouse-event";
 
 export default function LineDecoration() {
   const isSSR = typeof window === "undefined";
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mousePosition = useMouseMoveEvent();
+  const frameCount = useRef(0);
 
-  function draw(
-    ctx: CanvasRenderingContext2D,
-    frameCount: number,
-    value: number,
-    prevValue: number,
-    width: number,
-    height: number
-  ) {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  const draw = React.useCallback(
+    (
+      ctx: CanvasRenderingContext2D,
+      frameCount: number,
+      value: number,
+      prevValue: number,
+      width: number,
+      height: number
+    ) => {
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    const gap = Math.min(width, height) / 10;
-    const restX = width % gap;
-    const restY = height % gap;
-    const countX = Math.ceil(width / gap);
-    const countY = Math.ceil(height / gap);
+      const gap = Math.min(width, height) / 10;
+      const dash = gap / 20;
 
-    const x = (frameCount % 1000) / 1000;
+      const restX = width % gap;
+      const restY = height % gap;
+      const countX = Math.ceil(width / gap);
+      const countY = Math.ceil(height / gap);
 
-    // f: y=-2 x^(2)+2 x
-    // https://www.geogebra.org/calculator
-    const animation = (-2 * x ** 2 + 2 * x) / 2;
+      const x = (frameCount % 5000) / 5000;
 
-    function getCssVar(variable: string) {
-      const style = getComputedStyle(document.body);
-      return style.getPropertyValue(variable);
-    }
+      // f: y=-2 x^(2)+2 x
+      // https://www.geogebra.org/calculator
+      const animation = (-2 * x ** 2 + 2 * x) / 2;
 
-    function drawLine() {
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = getCssVar("--border-color");
-      ctx.fillStyle = getCssVar("--border-color");
-
-      for (let i = 0; i < countX; i++) {
-        const x = i * gap + restX / 2;
-
-        ctx.globalAlpha = 1 * animation;
-
-        ctx.beginPath();
-        ctx.setLineDash([5]);
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, height);
-        ctx.stroke();
+      function getCssVar(variable: string) {
+        const style = getComputedStyle(document.body);
+        return style.getPropertyValue(variable);
       }
 
-      for (let i = 0; i < countY; i++) {
-        const y = i * gap + restY / 2;
+      // const alpha = animation;
+      const alpha = 1;
 
-        ctx.globalAlpha = 1 * animation;
+      const gradientRadius = 500 * animation * 2;
 
-        ctx.beginPath();
-        ctx.setLineDash([5]);
-        ctx.moveTo(0, y);
-        ctx.lineTo(width, y);
-        ctx.stroke();
+      let radialGradient = mousePosition
+        ? ctx.createRadialGradient(
+            mousePosition.clientX,
+            mousePosition.clientY,
+            0,
+            mousePosition.clientX,
+            mousePosition.clientY,
+            gradientRadius
+          )
+        : undefined;
+
+      radialGradient?.addColorStop(0, getCssVar("--border-color"));
+      radialGradient?.addColorStop(1, "transparent");
+
+      function drawLine() {
+        ctx.lineWidth = 0.5;
+
+        ctx.strokeStyle = radialGradient
+          ? radialGradient
+          : getCssVar("--border-color");
+
+        ctx.fillStyle = radialGradient
+          ? radialGradient
+          : getCssVar("--border-color");
+
+        for (let i = 0; i < countX; i++) {
+          const x = i * gap + restX / 2;
+
+          ctx.globalAlpha = alpha;
+
+          ctx.beginPath();
+          ctx.setLineDash([dash]);
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, height);
+          ctx.stroke();
+        }
+
+        for (let i = 0; i < countY; i++) {
+          const y = i * gap + restY / 2;
+
+          ctx.globalAlpha = alpha;
+
+          ctx.beginPath();
+          ctx.setLineDash([dash]);
+          ctx.moveTo(0, y);
+          ctx.lineTo(width, y);
+          ctx.stroke();
+        }
       }
-    }
 
-    drawLine();
-  }
+      drawLine();
+    },
+    [mousePosition]
+  );
 
   useEffect(() => {
     if (isSSR) return;
@@ -80,21 +113,20 @@ export default function LineDecoration() {
 
     const ctx = canvas.getContext("2d")!;
 
-    let frameCount = 0;
     let animationFrameId: number;
     let startTime = Date.now();
     let value = 0;
 
     function render() {
       const frameTime = Date.now();
-      frameCount++;
+      frameCount.current++;
 
       const elapsed = frameTime - startTime;
 
       const prevValue = value;
       value = (elapsed % 3000) / 3000;
 
-      draw(ctx, frameCount, value, prevValue, width, height);
+      draw(ctx, frameCount.current, value, prevValue, width, height);
       animationFrameId = window.requestAnimationFrame(render);
     }
 
@@ -103,7 +135,7 @@ export default function LineDecoration() {
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [canvasRef]);
+  }, [canvasRef, mousePosition]);
 
   if (isSSR) {
     return <></>;
