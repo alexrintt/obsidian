@@ -1,15 +1,27 @@
 import * as React from "react";
 
-import "./style.ts";
+import * as S from "./style";
 import { LayoutHeader } from "../layout-header";
-import { GlobalStyle } from "./style.ts";
+import { LayoutNav } from "../layout-nav";
+import { LayoutFooter } from "../layout-footer";
+import LineDecoration from "../line-decoration";
 
-export function Layout({ children }: React.PropsWithChildren) {
+export type ILayoutProps = {
+  title?: string;
+};
+
+export function Layout({
+  children,
+  title,
+}: React.PropsWithChildren<ILayoutProps>) {
   return (
     <React.Fragment>
-      <GlobalStyle />
-      <LayoutHeader />
+      <LineDecoration />
+      <S.GlobalStyle />
+      <LayoutHeader title={title} />
+      <LayoutNav />
       {children}
+      <LayoutFooter />
     </React.Fragment>
   );
 }

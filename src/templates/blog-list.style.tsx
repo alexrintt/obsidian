@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "gatsby";
 import {
   resetBorder,
   withBorderBottom,
@@ -18,6 +19,8 @@ export const MainContainer = styled.div`
   max-width: var(--container-width);
   ${withBorderRight}
   ${withBorderLeft}
+  background: var(--surface-color);
+  position: relative;
 `;
 
 export function Main({ children }: React.PropsWithChildren) {
@@ -29,6 +32,15 @@ export function Main({ children }: React.PropsWithChildren) {
 }
 
 export const BlogPostItem = styled.div`
-  padding: 0 1.5rem;
+  padding: 1.5rem;
   ${withBorderBottom}
 `;
+
+export const BlogPostItemLink = styled(Link)`
+  color: var(--text-color);
+  &:hover {
+    color: var(--link-color);
+  }
+`;
+
+export const BlogPostItemThumb = styled.div``;

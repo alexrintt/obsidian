@@ -4,8 +4,16 @@ import { graphql, useStaticQuery } from "gatsby";
 import * as S from "./style.tsx";
 import { useSiteMetadata } from "../../hooks/use-site-metadata";
 
-export function LayoutHeader() {
+export type ILayoutHeaderProps = {
+  title?: string;
+  inverse?: boolean;
+};
+
+export function LayoutHeader({
+  title,
+  inverse,
+}: React.PropsWithoutRef<ILayoutHeaderProps>) {
   const siteMetadata: any = useSiteMetadata();
 
-  return <S.Header>{siteMetadata.title}</S.Header>;
+  return <S.Header inverse>{title ?? siteMetadata.title}</S.Header>;
 }

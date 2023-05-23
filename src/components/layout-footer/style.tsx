@@ -4,38 +4,43 @@ import {
   withBorderBottom,
   withBorderLeft,
   withBorderRight,
+  withBorderTop,
 } from "../../style/common";
 
-export const HeaderWrapper = styled.div<ISHeaderProps>`
+export const FooterWrapper = styled.div<ISFooterProps>`
   display: flex;
   justify-content: center;
-  z-index: 10;
+
+  background: black;
 
   ${withBorderBottom}
 `;
 
-export const HeaderContainer = styled.div<ISHeaderProps>`
+export const FooterContainer = styled.div<ISFooterProps>`
   width: 100%;
   max-width: var(--container-width);
   background: var(--surface-color);
   padding: 1.5rem;
-  ${withBorderLeft}
-  ${withBorderRight}
   display: flex;
   font-size: 2rem;
+  text-align: center;
+  color: white;
+
+  ${withBorderLeft}
+  ${withBorderRight}
 `;
 
-export type ISHeaderProps = {
+export type ISFooterProps = {
   inverse?: boolean;
 };
 
-export function Header({
+export function Footer({
   children,
   inverse,
-}: React.PropsWithChildren<ISHeaderProps>) {
+}: React.PropsWithChildren<ISFooterProps>) {
   return (
-    <HeaderWrapper inverse>
-      <HeaderContainer inverse>{children}</HeaderContainer>
-    </HeaderWrapper>
+    <FooterWrapper inverse>
+      <FooterContainer inverse>{children}</FooterContainer>
+    </FooterWrapper>
   );
 }

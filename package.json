@@ -1,5 +1,5 @@
 {
-  "name": "tnr-blog-template",
+  "name": "obsidian",
   "version": "1.0.0",
   "private": true,
   "description": "tnr-blog-template",
@@ -26,12 +26,17 @@
     "gatsby-plugin-sharp": "^5.10.0",
     "gatsby-plugin-sitemap": "^6.10.0",
     "gatsby-plugin-styled-components": "^6.10.0",
+    "gatsby-remark-shiki": "^0.2.1",
     "gatsby-source-contentful": "^8.10.0",
     "gatsby-source-filesystem": "^5.10.0",
+    "gatsby-source-github-graphql": "https://gitpkg.now.sh/alexrintt/gatsby-source-github-graphql/packages/gatsby-source-github-graphql?main",
+    "gatsby-source-github-graphql-discussions": "https://gitpkg.now.sh/alexrintt/gatsby-source-github-graphql/packages/gatsby-source-github-graphql-discussions?main",
     "gatsby-transformer-remark": "^6.10.0",
     "gatsby-transformer-sharp": "^5.10.0",
+    "html-dom-parser": "^3.1.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "slugify": "^1.6.6",
     "styled-components": "^6.0.0-rc.1"
   },
   "devDependencies": {

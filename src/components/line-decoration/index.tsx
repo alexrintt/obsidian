@@ -18,10 +18,12 @@ export default function LineDecoration() {
       width: number,
       height: number
     ) => {
+      if (!mousePosition) return;
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
       const gap = Math.min(width, height) / 10;
-      const dash = gap / 20;
+      // const dash = gap / 20;
+      const dash = undefined;
 
       const restX = width % gap;
       const restY = height % gap;
@@ -42,7 +44,8 @@ export default function LineDecoration() {
       // const alpha = animation;
       const alpha = 1;
 
-      const gradientRadius = 500 * animation * 2;
+      // const gradientRadius = 500 * animation * 2;
+      const gradientRadius = 500;
 
       let radialGradient = mousePosition
         ? ctx.createRadialGradient(
@@ -65,17 +68,13 @@ export default function LineDecoration() {
           ? radialGradient
           : getCssVar("--border-color");
 
-        ctx.fillStyle = radialGradient
-          ? radialGradient
-          : getCssVar("--border-color");
-
         for (let i = 0; i < countX; i++) {
           const x = i * gap + restX / 2;
 
           ctx.globalAlpha = alpha;
 
           ctx.beginPath();
-          ctx.setLineDash([dash]);
+          if (dash) ctx.setLineDash([dash]);
           ctx.moveTo(x, 0);
           ctx.lineTo(x, height);
           ctx.stroke();
@@ -87,7 +86,7 @@ export default function LineDecoration() {
           ctx.globalAlpha = alpha;
 
           ctx.beginPath();
-          ctx.setLineDash([dash]);
+          if (dash) ctx.setLineDash([dash]);
           ctx.moveTo(0, y);
           ctx.lineTo(width, y);
           ctx.stroke();

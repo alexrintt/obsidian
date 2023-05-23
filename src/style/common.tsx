@@ -6,21 +6,21 @@ export const resetBorder = css`
 `;
 
 export const withBorder = css`
-  border: 1px dashed var(--border-color);
+  border: 1px solid var(--border-color);
 `;
 
 export const withBorderBottom = css`
-  border-bottom: 1px dashed var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 `;
 
 export const withBorderTop = css`
-  border-top: 1px dashed var(--border-color);
+  border-top: 1px solid var(--border-color);
 `;
 
 export const withBorderLeft = css`
-  border-left: 1px dashed var(--border-color);
+  border-left: 1px solid var(--border-color);
 `;
 
 export const withBorderRight = css`
-  border-right: 1px dashed var(--border-color);
+  border-right: 1px solid var(--border-color);
 `;
