@@ -1,19 +1,35 @@
 import * as React from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery, Link } from "gatsby";
 
 import * as S from "./style.tsx";
 import { useSiteMetadata } from "../../hooks/use-site-metadata";
+import { GitHubUser } from "../layout/index.tsx";
+import { GatsbyImage, ImageDataLike, getImage } from "gatsby-plugin-image";
+import { NavLink } from "../layout-nav/style.tsx";
 
 export type ILayoutHeaderProps = {
   title?: string;
-  inverse?: boolean;
+  owner: GitHubUser;
 };
 
 export function LayoutHeader({
   title,
-  inverse,
+  owner,
 }: React.PropsWithoutRef<ILayoutHeaderProps>) {
   const siteMetadata: any = useSiteMetadata();
 
-  return <S.Header inverse>{title ?? siteMetadata.title}</S.Header>;
+  return (
+    <S.Header>
+      <S.OwnerHeader>
+        <S.OwnerPfp>
+          <GatsbyImage
+            image={getImage(owner.avatarUrlSharpOptimized!)!}
+            alt={owner.login!}
+          />
+        </S.OwnerPfp>
+        @<Link to={`https://github.com/${owner.login}`}>{owner.login}</Link>
+      </S.OwnerHeader>
+      {owner.bio}
+    </S.Header>
+  );
 }

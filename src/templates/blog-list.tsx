@@ -3,10 +3,11 @@ import { graphql, Link, PageProps, HeadFC, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
 
 import * as S from "./blog-list.style.tsx";
-import { Layout } from "../components/layout";
+import { GitHubUser, Layout } from "../components/layout";
 import LineDecoration from "../components/line-decoration/index.tsx";
 import { BlogListPaginator } from "../components/blog-list-paginator/index.tsx";
 import blogConfig from "../../blog.config.ts";
+import Seo from "../components/seo/index.tsx";
 
 // export const Head: HeadFC = () => <Seo />;
 
@@ -18,7 +19,9 @@ type IBlogPostItem = {
       excerpt: string;
     };
     path: string;
-    thumbnailImage?: ImageDataLike;
+    thumbnailImage?: {
+      childImageSharp: ImageDataLike;
+    };
     humanReadableCreatedAt: string;
     slug: string;
     timeAgo: string;
@@ -30,9 +33,12 @@ export function BlogPostItem({ post }: IBlogPostItem) {
     <S.BlogPostItem>
       <S.BlogPostItemLink to={post.path}>
         {post.thumbnailImage && (
-          <S.BlogPostItemThumb>
-            <GatsbyImage image={getImage(post.thumbnailImage)!} alt={""} />
-          </S.BlogPostItemThumb>
+          <GatsbyImage
+            image={
+              getImage(post.thumbnailImage!.childImageSharp! as ImageDataLike)!
+            }
+            alt={post.title}
+          />
         )}
         <p>
           {post.timeAgo} on {post.humanReadableCreatedAt}
@@ -58,6 +64,7 @@ export default function BlogListPage(
     pageContext: { currentPage, pageCount },
     data: {
       discussions: { nodes: discussions },
+      owner,
     },
   } = props;
 
@@ -66,10 +73,10 @@ export default function BlogListPage(
   }
 
   return (
-    <Layout>
+    <Layout owner={owner as GitHubUser}>
       <S.Main>
         {discussions.map((e: any) => {
-          return <BlogPostItem post={e} />;
+          return <BlogPostItem key={e.githubId} post={e} />;
         })}
         <BlogListPaginator
           currentPage={currentPage}
@@ -87,17 +94,38 @@ export default function BlogListPage(
   );
 }
 
+export const Head: HeadFC = () => <Seo />;
+
 export const query = graphql`
   fragment PostCoverImageData on File {
     childImageSharp {
       gatsbyImageData(
+        layout: CONSTRAINED
         width: 1920
         placeholder: BLURRED
         formats: [AUTO, WEBP, AVIF]
       )
     }
   }
-  query BlogListPage($skip: Int!, $limit: Int!) {
+  query BlogListPage($skip: Int!, $limit: Int!, $ownerLogin: String!) {
+    owner: gitHubUser(login: { eq: $ownerLogin }) {
+      avatarUrl
+      githubId
+      login
+      bio
+      avatarUrlSharpOptimized {
+        childImageSharp {
+          gatsbyImageData(
+            layout: FIXED
+            width: 50
+            height: 50
+            placeholder: TRACED_SVG
+            formats: [AUTO, WEBP, AVIF]
+          )
+        }
+        publicURL
+      }
+    }
     discussions: allGitHubDiscussion(
       sort: [{ createdAt: DESC }, { updatedAt: DESC }]
       skip: $skip
@@ -105,7 +133,7 @@ export const query = graphql`
     ) {
       totalCount
       nodes {
-        id
+        githubId
         title
         path
         slug

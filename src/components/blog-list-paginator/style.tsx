@@ -26,19 +26,14 @@ export const BlogListPaginatorContainer = styled.div<ISBlogListPaginatorProps>`
   font-size: 5rem;
 `;
 
-export type ISBlogListPaginatorProps = {
-  inverse?: boolean;
-};
+export type ISBlogListPaginatorProps = {};
 
 export function BlogListPaginator({
   children,
-  inverse,
 }: React.PropsWithChildren<ISBlogListPaginatorProps>) {
   return (
-    <BlogListPaginatorWrapper inverse>
-      <BlogListPaginatorContainer inverse>
-        {children}
-      </BlogListPaginatorContainer>
+    <BlogListPaginatorWrapper>
+      <BlogListPaginatorContainer>{children}</BlogListPaginatorContainer>
     </BlogListPaginatorWrapper>
   );
 }

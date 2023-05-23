@@ -102,6 +102,16 @@ const config: GatsbyConfig = {
               theme: "github-dark-dimmed", // Default
             },
           },
+          {
+            resolve: `gatsby-remark-images-anywhere`,
+            options: {
+              staticDir: `/static`,
+              backgroundColor: "var(--background-color)",
+              linkImagesToOriginal: true,
+              sharpMethod: "fluid",
+              maxWidth: 880,
+            },
+          },
         ],
         // Enable JS for https://github.com/jonschlinkert/gray-matter#optionsengines (default: false)
         // It's not advised to set this to "true" and this option will likely be removed in the future

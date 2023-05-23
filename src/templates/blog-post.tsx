@@ -1,60 +1,77 @@
 import * as React from "react";
 import { graphql, HeadFC, navigate, PageProps, Link } from "gatsby";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
-import { Layout } from "../components/layout";
+import { GitHubUser, Layout } from "../components/layout";
 import * as S from "./blog-post.style";
 import { LayoutHeader } from "../components/layout-header";
 import { NavLink } from "../components/layout-nav/style";
 import { BlogPostItem } from "./blog-list";
+import Seo from "../components/seo";
 
 export default function BlogPostPage(
   props: PageProps<Queries.BlogPostPageQuery>
 ) {
   const {
-    data: { gitHubDiscussion, relatedPosts },
+    data: { gitHubDiscussion, relatedPosts, owner },
   } = props;
 
   const post = gitHubDiscussion!;
 
-  const thumbnailImage = getImage(post?.thumbnailImage as ImageDataLike);
-
   return (
-    <Layout>
+    <Layout owner={owner as GitHubUser}>
       <S.MarkdownStyle />
-      {gitHubDiscussion?.thumbnailImage && (
+      {post?.thumbnailImage && (
         <S.ContentHero>
           <GatsbyImage
-            image={getImage(gitHubDiscussion!.thumbnailImage.childImageSharp)!}
-            alt={gitHubDiscussion!.title!}
+            image={getImage(post!.thumbnailImage.childImageSharp)!}
+            alt={post!.title!}
           />
         </S.ContentHero>
       )}
       <S.ContentMeta>
-        <h1>{post.title}</h1>
-        {gitHubDiscussion?.timeAgo} on{" "}
-        {gitHubDiscussion?.humanReadableCreatedAt} by @
-        <Link to={`https://github.com/${gitHubDiscussion?.author?.login}`}>
-          {gitHubDiscussion?.author?.login}
+        <S.ContentTitle>{post.title}</S.ContentTitle>
+        {post?.timeAgo} on {post?.humanReadableCreatedAt} by @
+        <Link to={`https://github.com/${post?.author?.login}`}>
+          {post?.author?.login}
         </Link>{" "}
-        at <Link to={gitHubDiscussion!.editPostUrl!}>GitHub</Link>
+        at <Link to={post!.editPostUrl!}>GitHub</Link>
       </S.ContentMeta>
       <S.Content
         className="markdown-body"
         dangerouslySetInnerHTML={{
-          __html: gitHubDiscussion!.childMarkdownRemark!.html!,
+          __html: post!.childMarkdownRemark!.html!,
         }}
       />
       <S.ContentDivider>
-        <h1>Other posts</h1>
+        {relatedPosts.nodes.length > 0 && <h1>Other posts</h1>}
       </S.ContentDivider>
       <S.ContentMeta noPadding>
         {relatedPosts.nodes.map((relatedPost) => {
-          return <BlogPostItem post={relatedPost as any} />;
+          return (
+            <BlogPostItem
+              key={relatedPost.githubId}
+              post={relatedPost as any}
+            />
+          );
         })}
       </S.ContentMeta>
     </Layout>
   );
 }
+
+export const Head: HeadFC<Queries.BlogPostPageQuery> = (props) => {
+  return (
+    <Seo
+      title={props.data.gitHubDiscussion?.title ?? undefined}
+      description={
+        props.data.gitHubDiscussion?.shortExcerpt?.excerpt ?? undefined
+      }
+      image={
+        props.data.gitHubDiscussion?.thumbnailImage?.publicURL ?? undefined
+      }
+    />
+  );
+};
 
 export const query = graphql`
   fragment PostPreviewInfo on GitHubDiscussion {
@@ -71,7 +88,26 @@ export const query = graphql`
     }
   }
 
-  query BlogPostPage($discussionGithubId: String!) {
+  query BlogPostPage($discussionGithubId: String!, $ownerLogin: String!) {
+    owner: gitHubUser(login: { eq: $ownerLogin }) {
+      avatarUrl
+      githubId
+      login
+      bio
+      avatarUrlSharpOptimized {
+        childImageSharp {
+          gatsbyImageData(
+            layout: FIXED
+            width: 50
+            height: 50
+            placeholder: TRACED_SVG
+            formats: [AUTO, WEBP, AVIF]
+          )
+        }
+        publicURL
+      }
+    }
+
     relatedPosts: allGitHubDiscussion(
       filter: { githubId: { ne: $discussionGithubId } }
       limit: 50

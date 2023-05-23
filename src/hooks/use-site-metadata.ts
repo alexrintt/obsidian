@@ -7,6 +7,9 @@ export function useSiteMetadata() {
         site {
           siteMetadata {
             title
+            description
+            image
+            siteUrl
           }
         }
       }

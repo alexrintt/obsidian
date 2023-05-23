@@ -43,4 +43,7 @@ export const BlogPostItemLink = styled(Link)`
   }
 `;
 
-export const BlogPostItemThumb = styled.div``;
+export const BlogPostItemThumb = styled.div`
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border-color);
+`;

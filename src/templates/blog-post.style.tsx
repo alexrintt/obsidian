@@ -74,6 +74,10 @@ export function ContentMeta({
   );
 }
 
+export const ContentTitle = styled.h1`
+  color: var(--title-color);
+`;
+
 export const ContentDividerWrapper = styled.main`
   width: 100%;
   display: flex;
@@ -132,7 +136,7 @@ export function ContentHero({
 }
 
 export const MarkdownStyle = createGlobalStyle`
-  .markdown-body .shiki {
+  .markdown-body .shiki, .markdown-body .shiki-unknown {
     background-color: var(--border-color) !important;
   }
   .markdown-body {

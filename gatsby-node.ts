@@ -62,6 +62,7 @@ const createBlogListPagination: CreatePagesAPI = async ({
         pageCount: pageCount,
         skip,
         limit,
+        ownerLogin: blogConfig.owner,
       },
     });
   }

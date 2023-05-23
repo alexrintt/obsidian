@@ -15,14 +15,18 @@ export function BlogListPaginator(props: IBlogListPaginator) {
       {Array.from({ length: props.totalPages }).map((_, i) => {
         const page = i + 1;
 
+        const link = props.generateLink(page);
+
         if (props.isDisabled(page)) {
           return (
-            <S.BlogListPageLinkDisabled>{page}</S.BlogListPageLinkDisabled>
+            <S.BlogListPageLinkDisabled key={link}>
+              {page}
+            </S.BlogListPageLinkDisabled>
           );
         }
 
         return (
-          <S.BlogListPageLink to={props.generateLink(page)}>
+          <S.BlogListPageLink key={link} to={props.generateLink(page)}>
             {page}
           </S.BlogListPageLink>
         );

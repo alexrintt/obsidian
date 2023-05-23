@@ -7,12 +7,18 @@ import blogConfig from "../../../blog.config.ts";
 export type ILayoutNavProps = {};
 
 export function LayoutNav() {
+  const links = blogConfig.socialMedia
+    .split(`\n`)
+    .filter((e) => e.length !== 0)
+    .map((e) => e.split(" "))
+    .map((e) => [e.slice(0, e.length - 1).join(" "), e[e.length - 1]]);
+
   return (
     <S.Nav>
       <S.NavLink to="/">Home</S.NavLink>
-      <S.NavLink to={`https://github.com/${blogConfig.owner}`}>
-        @{blogConfig.owner}
-      </S.NavLink>
+      {links.map(([linkName, linkUrl]) => {
+        return <S.NavLink to={linkUrl}>{linkName}</S.NavLink>;
+      })}
     </S.Nav>
   );
 }

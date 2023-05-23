@@ -11,36 +11,29 @@ export const FooterWrapper = styled.div<ISFooterProps>`
   display: flex;
   justify-content: center;
 
-  background: black;
-
   ${withBorderBottom}
 `;
 
 export const FooterContainer = styled.div<ISFooterProps>`
   width: 100%;
   max-width: var(--container-width);
-  background: var(--surface-color);
+
   padding: 1.5rem;
   display: flex;
   font-size: 2rem;
   text-align: center;
-  color: white;
+  background: var(--surface-color);
 
   ${withBorderLeft}
   ${withBorderRight}
 `;
 
-export type ISFooterProps = {
-  inverse?: boolean;
-};
+export type ISFooterProps = {};
 
-export function Footer({
-  children,
-  inverse,
-}: React.PropsWithChildren<ISFooterProps>) {
+export function Footer({ children }: React.PropsWithChildren<ISFooterProps>) {
   return (
-    <FooterWrapper inverse>
-      <FooterContainer inverse>{children}</FooterContainer>
+    <FooterWrapper>
+      <FooterContainer>{children}</FooterContainer>
     </FooterWrapper>
   );
 }
