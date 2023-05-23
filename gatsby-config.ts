@@ -27,7 +27,7 @@ function mapDiscussions(discussion: any) {
     }
 
     function htmlImgFromMarkImg(source: string): string {
-      const regex = /!\[(.*?)]\((https?:\/\/\S+\.\w+)\)/g;
+      const regex = /!\[(.*?)]\((.+)\)/g;
 
       // Dangerous but we trust the HTML source since only users with repo write access can publish posts.
       return source.replace(regex, `<img alt="$1" src="$2" />`);
