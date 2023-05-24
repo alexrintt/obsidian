@@ -12,9 +12,9 @@ export default {
   // Only users with repo-write access can modify announcement-type categories.
   safeCategories: [`Published`],
   siteMetadata: {
-    title: `Obsidian's Blog Template`,
+    title: `Obsidian's Blog`,
     twitterUsername: `<your-tt-username>`,
-    description: `Obsidian is a blog template built with Gatsby and GitHub, free and open-source.`,
+    description: `Obsidian is a blog and template built with Gatsby and GitHub, free and open-source.`,
     image: `https://user-images.githubusercontent.com/51419598/240399860-a9fb362c-28a0-4838-b8d5-8332c2feecb5.png`,
     siteUrl: `https://alexrintt.io`,
   },
