@@ -196,6 +196,7 @@ const config: GatsbyConfig = {
             options: {
               owner: blogConfig.owner,
               repo: blogConfig.repo,
+              categorySlugs: blogConfig.safeCategories,
             },
           },
         ],
