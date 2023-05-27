@@ -136,9 +136,5 @@ export default function LineDecoration() {
     };
   }, [canvasRef, mousePosition]);
 
-  if (isSSR) {
-    return <></>;
-  }
-
   return <canvas className="line-decoration-canvas-element" ref={canvasRef} />;
 }
