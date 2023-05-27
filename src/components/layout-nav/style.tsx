@@ -22,6 +22,7 @@ export const NavContainer = styled.div`
   ${withBorderLeft}
   ${withBorderRight}
   display: flex;
+  flex-wrap: wrap;
 `;
 
 export function Nav({ children }: React.PropsWithChildren) {
@@ -37,4 +38,5 @@ export const NavLink = styled(Link)`
     text-decoration: underline;
   }
   margin-right: 1rem;
+  margin-bottom: 0.3rem;
 `;

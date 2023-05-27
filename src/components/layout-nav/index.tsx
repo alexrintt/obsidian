@@ -17,7 +17,11 @@ export function LayoutNav() {
     <S.Nav>
       <S.NavLink to="/">Home</S.NavLink>
       {links.map(([linkName, linkUrl]) => {
-        return <S.NavLink to={linkUrl}>{linkName}</S.NavLink>;
+        return (
+          <S.NavLink key={linkName + linkUrl} to={linkUrl}>
+            {linkName}
+          </S.NavLink>
+        );
       })}
     </S.Nav>
   );
