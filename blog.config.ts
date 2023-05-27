@@ -1,5 +1,7 @@
 const socialMedia = `
 GitHub https://github.com/alexrintt/obsidian
+Telegram https://t.me/alexrintt
+Discord https://discord.alexrintt.io/
 Email mailto:reach@alexrintt.io
 Fork this blog https://alexrintt.io/obsidian/how-to-use-obsidian's-blog-template-(built-with-gatsby-and-github-actions-but-no-coding-skills-are-required)/
 `;
