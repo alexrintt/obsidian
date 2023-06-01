@@ -74,6 +74,7 @@ export function ContentMeta({
 
 export const ContentTitle = styled.h1`
   color: var(--title-color);
+  font-size: 2.5rem;
 `;
 
 export const ContentDividerWrapper = styled.section`
