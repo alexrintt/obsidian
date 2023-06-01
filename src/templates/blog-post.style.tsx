@@ -132,6 +132,26 @@ export const ContentHeroContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  // overflow-y: hidden;
+  // overflow-x: visible;
+`;
+
+export const ContentHeroImg = styled.div`
+  z-index: 10;
+`;
+
+export const ContentHeroBackdrop = styled.section`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  // TODO: Dark mode opacity should be 10%
+  filter: blur(75px) opacity(100%);
+
+  z-index: 5;
 `;
 
 export function ContentHero({
@@ -143,7 +163,10 @@ export function ContentHero({
 >) {
   return (
     <ContentHeroWrapper>
-      <ContentHeroContainer {...props}>{children}</ContentHeroContainer>
+      <ContentHeroContainer {...props}>
+        <ContentHeroImg>{children}</ContentHeroImg>
+        <ContentHeroBackdrop>{children}</ContentHeroBackdrop>
+      </ContentHeroContainer>
     </ContentHeroWrapper>
   );
 }

@@ -17,12 +17,12 @@ export const GlobalStyle = createGlobalStyle`
     // --title-color: #c1c1c1;
 
     // Light mode - Nature
-    --border-color: #1F8A70;
-    --background-color: #DDFFBB;
-    --link-color: #1F8A70;
-    --surface-color: #DDFFBB;
-    --text-color: #41644A;
-    --title-color: #263A29;
+    // --border-color: #1F8A70;
+    // --background-color: #DDFFBB;
+    // --link-color: #1F8A70;
+    // --surface-color: #DDFFBB;
+    // --text-color: #41644A;
+    // --title-color: #263A29;
 
     // Light mode - Default
     --border-color: #FbFbFb;
