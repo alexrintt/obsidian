@@ -4,3 +4,4 @@ public
 src/gatsby-types.d.ts
 *.env
 !.env.example
+yarn-error.log

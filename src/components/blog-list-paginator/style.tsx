@@ -1,10 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  withBorderBottom,
-  withBorderLeft,
-  withBorderRight,
-} from "../../style/common";
+import { withBorderBottom } from "../../style/common";
 import { Link } from "gatsby";
 
 export const BlogListPaginatorWrapper = styled.div<ISBlogListPaginatorProps>`
@@ -20,8 +16,6 @@ export const BlogListPaginatorContainer = styled.div<ISBlogListPaginatorProps>`
   background: ;
   background: var(--surface-color);
   padding: 1.5rem;
-  ${withBorderLeft}
-  ${withBorderRight}
   display: flex;
   font-size: 5rem;
 `;

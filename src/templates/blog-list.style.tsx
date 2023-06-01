@@ -30,20 +30,3 @@ export function Main({ children }: React.PropsWithChildren) {
     </MainWrapper>
   );
 }
-
-export const BlogPostItem = styled.div`
-  padding: 1.5rem;
-  ${withBorderBottom}
-`;
-
-export const BlogPostItemLink = styled(Link)`
-  color: var(--text-color);
-  &:hover {
-    color: var(--link-color);
-  }
-`;
-
-export const BlogPostItemThumb = styled.div`
-  aspect-ratio: 16 / 9;
-  border: 1px solid var(--border-color);
-`;

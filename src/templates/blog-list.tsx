@@ -1,54 +1,11 @@
 import * as React from "react";
-import { graphql, Link, PageProps, HeadFC, useStaticQuery } from "gatsby";
-import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
+import { graphql, PageProps, HeadFC } from "gatsby";
 
 import * as S from "./blog-list.style.tsx";
 import { GitHubUser, Layout } from "../components/layout";
-import LineDecoration from "../components/line-decoration/index.tsx";
 import { BlogListPaginator } from "../components/blog-list-paginator/index.tsx";
-import blogConfig from "../../blog.config.ts";
 import Seo from "../components/seo/index.tsx";
-
-// export const Head: HeadFC = () => <Seo />;
-
-type IBlogPostItem = {
-  post: {
-    title: string;
-    excerpt: string;
-    shortExcerpt: {
-      excerpt: string;
-    };
-    path: string;
-    thumbnailImage?: {
-      childImageSharp: ImageDataLike;
-    };
-    humanReadableCreatedAt: string;
-    slug: string;
-    timeAgo: string;
-  };
-};
-
-export function BlogPostItem({ post }: IBlogPostItem) {
-  return (
-    <S.BlogPostItem>
-      <S.BlogPostItemLink to={post.path}>
-        {post.thumbnailImage && (
-          <GatsbyImage
-            image={
-              getImage(post.thumbnailImage!.childImageSharp! as ImageDataLike)!
-            }
-            alt={post.title}
-          />
-        )}
-        <p>
-          {post.timeAgo} on {post.humanReadableCreatedAt}
-        </p>
-        <h1>{post.title}</h1>
-        <p>{post.shortExcerpt.excerpt}</p>
-      </S.BlogPostItemLink>
-    </S.BlogPostItem>
-  );
-}
+import { BlogPostItem } from "../components/blog-post-item/index.tsx";
 
 export type BlogListPageContext = {
   currentPage: number;
@@ -141,7 +98,6 @@ export const query = graphql`
           excerpt(format: PLAIN, pruneLength: 240)
         }
         humanReadableCreatedAt: createdAt(formatString: "dddd, MMMM Do YYYY")
-        timeAgo: createdAt(fromNow: true)
         thumbnailImage {
           ...PostCoverImageData
           publicURL

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import * as S from "./style";
+import * as S from "../../style/style";
 import { LayoutHeader } from "../layout-header";
 import { LayoutNav } from "../layout-nav";
 import { LayoutFooter } from "../layout-footer";
@@ -15,20 +15,18 @@ export type GitHubUser = {
 };
 
 export type ILayoutProps = {
-  title?: string;
   owner: GitHubUser;
 };
 
 export function Layout({
   children,
-  title,
   owner,
 }: React.PropsWithChildren<ILayoutProps>) {
   return (
     <React.Fragment>
-      <LineDecoration />
       <S.GlobalStyle />
-      <LayoutHeader owner={owner} title={title} />
+      <LineDecoration />
+      <LayoutHeader owner={owner} />
       <LayoutNav />
       {children}
       <LayoutFooter />

@@ -1,11 +1,9 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import {
-  resetBorder,
   withBorderBottom,
   withBorderLeft,
   withBorderRight,
-  withBorderTop,
 } from "../style/common";
 
 export const ContentWrapper = styled.main`
@@ -37,7 +35,7 @@ export function Content({
   );
 }
 
-export const ContentMetaWrapper = styled.main`
+export const ContentMetaWrapper = styled.section`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -78,7 +76,7 @@ export const ContentTitle = styled.h1`
   color: var(--title-color);
 `;
 
-export const ContentDividerWrapper = styled.main`
+export const ContentDividerWrapper = styled.section`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -107,7 +105,7 @@ export function ContentDivider({
   );
 }
 
-export const ContentHeroWrapper = styled.main`
+export const ContentHeroWrapper = styled.section`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -119,6 +117,20 @@ export const ContentHeroContainer = styled.div`
   max-width: var(--container-width);
   ${withBorderRight}
   ${withBorderLeft}
+
+  position: relative;
+
+  width: 100%;
+  max-height: 50vh;
+
+  * {
+    width: 100%;
+    height: 100%;
+  }
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export function ContentHero({
@@ -144,7 +156,7 @@ export const MarkdownStyle = createGlobalStyle`
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     margin: 0;
-    color: #c9d1d9;
+    color: var(--text-color);
     background-color: var(--surface-color);
     font-size: 16px;
     line-height: 1.5;
@@ -211,12 +223,12 @@ export const MarkdownStyle = createGlobalStyle`
     font-weight: 600;
     padding-bottom: .3em;
     font-size: 2em;
-    border-bottom: 1px solid #21262d;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   .markdown-body mark {
     background-color: rgba(187,128,9,0.15);
-    color: #c9d1d9;
+    color: var(--text-color);
   }
 
   .markdown-body small {
@@ -262,11 +274,11 @@ export const MarkdownStyle = createGlobalStyle`
     box-sizing: content-box;
     overflow: hidden;
     background: transparent;
-    border-bottom: 1px solid #21262d;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     height: .25em;
     padding: 0;
     margin: 24px 0;
-    background-color: #30363d;
+    background-color: var(--border-color);
     border: 0;
   }
 
@@ -392,7 +404,7 @@ export const MarkdownStyle = createGlobalStyle`
     padding: 3px 5px;
     font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
     line-height: 10px;
-    color: #c9d1d9;
+    color: var(--text-color);
     vertical-align: middle;
     background-color: #161b22;
     border: solid 1px rgba(110,118,129,0.4);
@@ -417,7 +429,7 @@ export const MarkdownStyle = createGlobalStyle`
     font-weight: 600;
     padding-bottom: .3em;
     font-size: 1.5em;
-    border-bottom: 1px solid #21262d;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   .markdown-body h3 {
@@ -570,7 +582,7 @@ export const MarkdownStyle = createGlobalStyle`
   .markdown-body h4 .octicon-link,
   .markdown-body h5 .octicon-link,
   .markdown-body h6 .octicon-link {
-    color: #c9d1d9;
+    color: var(--text-color);
     vertical-align: middle;
     visibility: hidden;
   }
@@ -757,7 +769,7 @@ export const MarkdownStyle = createGlobalStyle`
     display: block;
     padding: 5px 0 0;
     clear: both;
-    color: #c9d1d9;
+    color: var(--text-color);
   }
 
   .markdown-body span.align-center {
@@ -957,7 +969,7 @@ export const MarkdownStyle = createGlobalStyle`
   }
 
   .markdown-body .footnotes li:target {
-    color: #c9d1d9;
+    color: var(--text-color);
   }
 
   .markdown-body .footnotes .data-footnote-backref g-emoji {
@@ -980,7 +992,7 @@ export const MarkdownStyle = createGlobalStyle`
 
   .markdown-body .pl-smi,
   .markdown-body .pl-s .pl-s1 {
-    color: #c9d1d9;
+    color: var(--text-color);
   }
 
   .markdown-body .pl-ent {
@@ -1038,12 +1050,12 @@ export const MarkdownStyle = createGlobalStyle`
 
   .markdown-body .pl-mi {
     font-style: italic;
-    color: #c9d1d9;
+    color: var(--text-color);
   }
 
   .markdown-body .pl-mb {
     font-weight: bold;
-    color: #c9d1d9;
+    color: var(--text-color);
   }
 
   .markdown-body .pl-md {
@@ -1062,7 +1074,7 @@ export const MarkdownStyle = createGlobalStyle`
   }
 
   .markdown-body .pl-mi2 {
-    color: #c9d1d9;
+    color: var(--text-color);
     background-color: #1158c7;
   }
 

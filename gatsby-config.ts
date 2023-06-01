@@ -73,6 +73,16 @@ const config: GatsbyConfig = {
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Roboto Mono`,
+          `Roboto Mono\:400,400i,700`, // you can also specify font weights and styles
+        ],
+        display: "swap",
+      },
+    },
     `gatsby-plugin-styled-components`,
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",

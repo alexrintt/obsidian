@@ -42,7 +42,7 @@ export default function LineDecoration() {
       }
 
       // const alpha = animation;
-      const alpha = 1;
+      const alpha = 0.2;
 
       // const gradientRadius = 500 * animation * 2;
       const gradientRadius = 500;
@@ -59,7 +59,7 @@ export default function LineDecoration() {
         : undefined;
 
       radialGradient?.addColorStop(0, getCssVar("--border-color"));
-      radialGradient?.addColorStop(1, "transparent");
+      radialGradient?.addColorStop(1, getCssVar("--background-color"));
 
       function drawLine() {
         ctx.lineWidth = 0.5;

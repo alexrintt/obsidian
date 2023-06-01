@@ -5,8 +5,8 @@ import { GitHubUser, Layout } from "../components/layout";
 import * as S from "./blog-post.style";
 import { LayoutHeader } from "../components/layout-header";
 import { NavLink } from "../components/layout-nav/style";
-import { BlogPostItem } from "./blog-list";
 import Seo from "../components/seo";
+import { BlogPostItem } from "../components/blog-post-item";
 
 export default function BlogPostPage(
   props: PageProps<Queries.BlogPostPageQuery>
@@ -30,7 +30,7 @@ export default function BlogPostPage(
       )}
       <S.ContentMeta>
         <S.ContentTitle>{post.title}</S.ContentTitle>
-        {post?.timeAgo} on {post?.humanReadableCreatedAt} by @
+        {post?.humanReadableCreatedAt} by @
         <Link to={`https://github.com/${post?.author?.login}`}>
           {post?.author?.login}
         </Link>{" "}
@@ -82,7 +82,6 @@ export const query = graphql`
     path
     editPostUrl: discussionUrl
     humanReadableCreatedAt: createdAt(formatString: "dddd, MMMM Do YYYY")
-    timeAgo: createdAt(fromNow: true)
     shortExcerpt: childMarkdownRemark {
       excerpt(format: PLAIN, pruneLength: 240)
     }

@@ -8,16 +8,12 @@ import { GatsbyImage, ImageDataLike, getImage } from "gatsby-plugin-image";
 import { NavLink } from "../layout-nav/style.tsx";
 
 export type ILayoutHeaderProps = {
-  title?: string;
   owner: GitHubUser;
 };
 
 export function LayoutHeader({
-  title,
   owner,
 }: React.PropsWithoutRef<ILayoutHeaderProps>) {
-  const siteMetadata: any = useSiteMetadata();
-
   return (
     <S.Header>
       <S.OwnerHeader>
