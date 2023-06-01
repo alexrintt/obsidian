@@ -1,4 +1,4 @@
-![](https://github.com/alexrintt/obsidian/assets/51419598/769af905-1809-428c-87cf-ccd5ce61329a)
+<img src="https://github.com/alexrintt/obsidian/assets/51419598/02a5f5e7-9acc-4dfd-932d-92b5a34fccdf">
 
 <p align="center">
   <a href="https://alexrintt.io/obsidian"><b>Live Website</b></a> •
