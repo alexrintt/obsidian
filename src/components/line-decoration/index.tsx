@@ -2,6 +2,13 @@ import React, { CanvasHTMLAttributes, useEffect, useMemo, useRef } from "react";
 import "./style.css";
 import { useMouseMoveEvent } from "../../hooks/use-mouse-event";
 
+// TODO: When using multiple themes, replace all [getCssVar] calls with hooks
+// (e.g useCssVar(...)) that when theme changes triggers a re-render.
+export function getCssVar(variable: string): string {
+  const style = getComputedStyle(document.body);
+  return style.getPropertyValue(variable);
+}
+
 export default function LineDecoration() {
   const isSSR = typeof window === "undefined";
 
@@ -35,11 +42,6 @@ export default function LineDecoration() {
       // f: y=-2 x^(2)+2 x
       // https://www.geogebra.org/calculator
       const animation = (-2 * x ** 2 + 2 * x) / 2;
-
-      function getCssVar(variable: string) {
-        const style = getComputedStyle(document.body);
-        return style.getPropertyValue(variable);
-      }
 
       // const alpha = animation;
       const alpha = 0.2;

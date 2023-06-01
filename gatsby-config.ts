@@ -83,6 +83,7 @@ const config: GatsbyConfig = {
         display: "swap",
       },
     },
+    `gatsby-plugin-transition-link`,
     `gatsby-plugin-styled-components`,
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",

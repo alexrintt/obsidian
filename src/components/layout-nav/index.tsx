@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import * as S from "./style.tsx";
-import { useSiteMetadata } from "../../hooks/use-site-metadata";
 import blogConfig from "../../../blog.config.ts";
 
 export type ILayoutNavProps = {};

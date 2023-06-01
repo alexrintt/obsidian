@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { Link } from "gatsby";
 import { withBorder, withBorderBottom } from "../../style/common";
+import { InLink } from "../inlink";
 
 export const BlogPostItem = styled.div`
   padding: 1.5rem;
   ${withBorderBottom}
 `;
 
-export const BlogPostItemLink = styled(Link)`
+export const BlogPostItemLink = styled(InLink)`
   color: var(--text-color);
   &:hover {
     color: var(--link-color);

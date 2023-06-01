@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { withBorderBottom } from "../../style/common";
-import { Link } from "gatsby";
+import { InLink } from "../inlink";
 
 export const BlogListPaginatorWrapper = styled.div<ISBlogListPaginatorProps>`
   display: flex;
@@ -32,7 +32,7 @@ export function BlogListPaginator({
   );
 }
 
-export const BlogListPageLink = styled(Link)`
+export const BlogListPageLink = styled(InLink)`
   font-size: 2rem;
   margin-right: 1rem;
   &:hover {

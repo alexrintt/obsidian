@@ -6,7 +6,7 @@ import {
   withBorderRight,
 } from "../../style/common";
 
-import { Link } from "gatsby";
+import { InLink } from "../inlink";
 
 export const NavWrapper = styled.div`
   display: flex;
@@ -33,10 +33,11 @@ export function Nav({ children }: React.PropsWithChildren) {
   );
 }
 
-export const NavLink = styled(Link)`
+export const NavLink = styled(InLink)`
   &:hover {
-    text-decoration: underline;
+    text-decoration: underline double;
   }
   margin-right: 1rem;
   margin-bottom: 0.3rem;
+  display: block;
 `;

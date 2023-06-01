@@ -7,6 +7,7 @@ import { LayoutHeader } from "../components/layout-header";
 import { NavLink } from "../components/layout-nav/style";
 import Seo from "../components/seo";
 import { BlogPostItem } from "../components/blog-post-item";
+import { InLink } from "../components/inlink";
 
 export default function BlogPostPage(
   props: PageProps<Queries.BlogPostPageQuery>
@@ -31,10 +32,10 @@ export default function BlogPostPage(
       <S.ContentMeta>
         <S.ContentTitle>{post.title}</S.ContentTitle>
         {post?.humanReadableCreatedAt} by @
-        <Link to={`https://github.com/${post?.author?.login}`}>
+        <InLink to={`https://github.com/${post?.author?.login}`}>
           {post?.author?.login}
-        </Link>{" "}
-        at <Link to={post!.editPostUrl!}>GitHub</Link>
+        </InLink>{" "}
+        at <InLink to={post!.editPostUrl!}>GitHub</InLink>
       </S.ContentMeta>
       <S.Content
         className="markdown-body"
