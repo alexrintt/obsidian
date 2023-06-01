@@ -5,7 +5,8 @@ import { useMouseMoveEvent } from "../../hooks/use-mouse-event";
 // TODO: When using multiple themes, replace all [getCssVar] calls with hooks
 // (e.g useCssVar(...)) that when theme changes triggers a re-render.
 export function getCssVar(variable: string): string {
-  const style = getComputedStyle(document.body);
+  if (typeof window === "undefined") return "#000000";
+  const style = window.getComputedStyle(window.document.body);
   return style.getPropertyValue(variable);
 }
 
