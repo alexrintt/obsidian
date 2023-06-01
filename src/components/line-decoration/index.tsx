@@ -59,7 +59,7 @@ export default function LineDecoration() {
         : undefined;
 
       radialGradient?.addColorStop(0, getCssVar("--border-color"));
-      radialGradient?.addColorStop(1, getCssVar("--background-color"));
+      radialGradient?.addColorStop(1, "transparent");
 
       function drawLine() {
         ctx.lineWidth = 0.5;

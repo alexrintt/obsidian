@@ -29,8 +29,8 @@ export const GlobalStyle = createGlobalStyle`
     --background-color: #FFFFFF;
     --link-color: #1F8A70;
     --surface-color: #FbFbFb;
-    --text-color: #15604e;
-    --title-color: #125243;
+    --text-color: #061b16;
+    --title-color: #030d0b;
 
     background: var(--background-color);
   }
