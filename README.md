@@ -9,7 +9,7 @@
 
 Obsidian is a configurable and serverless blog, fully hosted on GitHub pages and [GitHub discussions](https://github.com/alexrintt/obsidian/discussions) (CMS).
 
-The design has a minimalist original dark-themed UI.
+The general design is original and tries to follow minimalism pattern. The markup content style is from [GitHub markdown CSS](https://github.com/sindresorhus/github-markdown-css).
 
 See [how to clone and use with your posts and your data](https://alexrintt.io/obsidian/how-to-use-obsidian's-blog-template-(built-with-gatsby-and-github-actions-but-no-coding-skills-are-required)/).
 
