@@ -25,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
     // --title-color: #263A29;
 
     // Light mode - Default
-    --border-color: #FbFbFb;
+    --border-color: #f5f5f5;
     --background-color: #FFFFFF;
     --link-color: #1F8A70;
     --surface-color: #FbFbFb;

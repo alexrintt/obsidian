@@ -42,9 +42,11 @@ export function Header({ children }: React.PropsWithChildren<ISHeaderProps>) {
 
 export const OwnerHeader = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   padding: 0;
   margin-bottom: 1rem;
+  text-align: center;
 `;
 
 export const OwnerPfp = styled.div`
@@ -52,12 +54,12 @@ export const OwnerPfp = styled.div`
   width: 50px;
   height: 50px;
 
+  box-sizing: content-box;
+
   ${withBorder}
 
   display: flex;
   justify-content: center;
   align-items: center;
-
   overflow: hidden;
-  margin-right: 1rem;
 `;
