@@ -173,7 +173,10 @@ export function ContentHero({
 
 export const MarkdownStyle = createGlobalStyle`
   .markdown-body .shiki, .markdown-body .shiki-unknown {
-    background-color: var(--border-color) !important;
+    background-color: #161b22 !important;
+  }
+  .markdown-body .shiki-unknown {
+    color: #e1e1e1 !important;
   }
   .markdown-body {
     color-scheme: dark;
@@ -431,10 +434,10 @@ export const MarkdownStyle = createGlobalStyle`
     color: var(--text-color);
     vertical-align: middle;
     background-color: #161b22;
-    border: solid 1px rgba(110,118,129,0.4);
-    border-bottom-color: rgba(110,118,129,0.4);
+    border: solid 1px var(--border-color);
+    border-bottom-color: var(--border-color);
     border-radius: 6px;
-    box-shadow: inset 0 -1px 0 rgba(110,118,129,0.4);
+    box-shadow: inset 0 -1px 0 var(--border-color);
   }
 
   .markdown-body h1,
@@ -863,7 +866,7 @@ export const MarkdownStyle = createGlobalStyle`
     margin: 0;
     font-size: 85%;
     white-space: break-spaces;
-    background-color: rgba(110,118,129,0.4);
+    background-color: var(--border-color);
     border-radius: 6px;
   }
 
